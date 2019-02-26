@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 
 NAME="Benchmark"
-VERSION="1.3"
+VERSION="1.3.1"
 
-error() {
+error_no_arguments() {
     echo "Benchmark needs at leasts one argument."
     echo -e "\t Check \"benchmark -h\" for help."
 }
 
+error_unrecognised_argument(){
+    echo "Unrecognised option \"$1\""
+    echo -e "\t Check \"benchmark -h\" for help."
+}
+
 if [[ "$#" -eq 0 ]]; then
-    error
+    error_no_arguments
 
 elif [ "$1" == "-h" ] || [ "$1" == "--help" ] ; then
     echo "Compiles and lunch the same test in differents programming languages then displays rhe execution time for each of them.
@@ -70,7 +75,7 @@ elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
     echo $NAME" v"$VERSION
 
 else
-    error
+    error_unrecognised_argument $1
 fi
 
 echo ""
