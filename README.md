@@ -3,7 +3,7 @@ A benchmark to evaluate the performances of different programming languages.
 
 ## Important notes
  * This benchmark has no scientific value
- * The benchmark has to be launched on Mac x86 64bits machine to be able to compile the assembly code
+ * The benchmark has to be launched on **Mac x86 64bits** machine to be able to compile the assembly code
  * To run the javascript code, ```node``` has to be installed
 
 ## Presentation
