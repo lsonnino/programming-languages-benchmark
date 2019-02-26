@@ -2,6 +2,8 @@
 
 This folder contains usefull codes.
 
+Those are example and test codes used to make the benchmark ones.
+
 
 
 ## Assembly code
