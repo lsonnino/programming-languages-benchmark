@@ -25,7 +25,7 @@ The program lanches a for loop to count from 0 to 10^8 one by one
 
 ## How it works
 First, the benchmark compile the codes that require compiling. Those who doesn't are just copied into the ```build``` folder.
-Then it lanches one by one each script/executable.
+Then it launches one by one each script/executable.
 
 
 
