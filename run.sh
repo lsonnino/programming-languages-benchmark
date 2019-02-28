@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 source path.sh
-source loading.sh
 
 get_score(){
     local var=$1
