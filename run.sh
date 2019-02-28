@@ -30,7 +30,12 @@ run_short(){
 }
 
 run_long(){
-    echo -ne " > "$1" \t : \t "
+    size=${#1}
+    if [[ ${#1} -lt 4 ]]; then
+        echo -ne " > "$1" \t\t : \t "
+    else
+        echo -ne " > "$1" \t : \t "
+    fi
 
     echo -ne "..."
     var=$( { time ${@:2}; } 2>&1 | grep real | awk  '{print $2}')

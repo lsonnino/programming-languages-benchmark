@@ -8,7 +8,7 @@ fi
 args="${@:2}"
 
 if [[ $args == "" ]]; then
-    args="c python assembly swift java js ruby perl bash"
+    args="c assembly java python swift js ruby perl bash"
 fi
 
 if [[ $short == 0 ]]; then

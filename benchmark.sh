@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NAME="Benchmark"
-VERSION="1.4"
+VERSION="1.4.1"
 
 error_no_arguments() {
     echo "Benchmark needs at leasts one argument."
