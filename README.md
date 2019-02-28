@@ -39,6 +39,7 @@ The possible **options** are:
  * ```-h``` or ```--help```: Displays all the currently supported options
  * ```-i``` or ```--info```: Displays informations about the benchmark and the currently installed supported programming languages
  * ```-r``` or ```--run```: Run the benchmark. As argument, the programming languages to be tested can be given
+ * ```-rs``` or ```--run-short```: Same as ```-r``` but only displays the results of the benchmark in a minimalistic way
  * ```-t``` or ```--todo```: Displays the onn work features still to be added
  * ```-v``` or ```--version```: Displays the current version number
 
