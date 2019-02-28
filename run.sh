@@ -17,7 +17,19 @@ get_score(){
     echo $s
 }
 
-run_test(){
+if [[ $1 == 1 ]]; then
+    short=1
+else
+    short=0
+fi
+
+run_short(){
+    echo -ne "$1 "
+    var=$( { time ${@:2}; } 2>&1 | grep real | awk  '{print $2}')
+    echo $(get_score $var)
+}
+
+run_long(){
     echo -ne " > "$1" \t : \t "
 
     echo -ne "..."
@@ -26,8 +38,19 @@ run_test(){
     echo $(get_score $var)
 }
 
-echo "Execution time [sec]"
-for arg in "$@"
+run_test(){
+    if [[ $short == 0 ]]; then
+        run_long $@
+    else
+        run_short $@
+    fi
+}
+
+if [[ $short == 0 ]]; then
+    echo "Execution time [sec]"
+fi
+
+for arg in "${@:2}"
 do
 
     if [[ $arg == "c" ]]; then
@@ -60,6 +83,6 @@ do
         run_test javascript node $build_folder/countJS.js
 
     else
-        echo " > Language " $arg " not supported yet. Passed."
+        (>&2 echo " > Language " $arg " not supported yet. Passed.")
     fi
 done

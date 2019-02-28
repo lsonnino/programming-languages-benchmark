@@ -1,19 +1,29 @@
 #!/usr/bin/env bash
+if [[ "$1" == "1" ]]; then
+    short=1
+else
+    short=0
+fi
 
-args="$@"
-if [[ "$#" == 0 ]]; then
-    #args="python c java assembly"
+args="${@:2}"
+
+if [[ $args == "" ]]; then
     args="c python assembly swift java js ruby perl bash"
 fi
 
-echo "  ** Compiling **  "
+if [[ $short == 0 ]]; then
+    echo "  ** Preparing **  "
+fi
 chmod +x compile.sh
-./compile.sh $args
+./compile.sh $short $args
 
-echo ""
-echo ""
-echo ""
+if [[ $short == 0 ]]; then
+    echo ""
+    echo ""
+    echo ""
 
-echo "  ** Running **  "
+    echo "  ** Running **  "
+fi
+
 chmod +x run.sh
-./run.sh $args
+./run.sh $short $args

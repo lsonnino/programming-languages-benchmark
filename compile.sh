@@ -10,42 +10,64 @@ if [ ! -d "$temporary_folder" ]; then
   created_tmp=1
 fi
 
-for arg in "$@"
+if [[ $1 == 1 ]]; then
+    short=1
+else
+    short=0
+fi
+
+compile(){
+    if [[ $short == 0 ]]; then
+        echo -ne "\t compiling $1 files ... "
+    fi
+
+    $(${@:2})
+
+    if [[ $short == 0 ]]; then
+        echo "done"
+    fi
+}
+
+prepare(){
+    if [[ $short == 0 ]]; then
+        echo -ne "\t preparing $1 files ... "
+    fi
+
+    $(${@:2})
+
+    if [[ $short == 0 ]]; then
+        echo "done"
+    fi
+}
+
+for arg in "${@:2}"
 do
     if [[ $arg == "c" ]]; then
-        printf "    C file ... "
-        gcc -o $build_folder/countC $src_folder/C/countC.c
-        echo "done"
+        compile C gcc -o $build_folder/countC $src_folder/C/countC.c
 
     elif [[ $arg == "java" ]]; then
-        printf "    Java file ... "
-        javac -d $build_folder $src_folder/Java/CountJava.java
-        echo "done"
+        compile java javac -d $build_folder $src_folder/Java/CountJava.java
 
     elif [[ $arg == "assembly" ]]; then
-        printf "    Assembly ... "
-        nasm -fmacho64 $src_folder/Assembly/countAssembly.asm -o $temporary_folder/countAssembly.o
-        gcc -o $build_folder/countAssembly $temporary_folder/countAssembly.o 2>/dev/null
-        echo "done"
+        compile assembly nasm -fmacho64 $src_folder/Assembly/countAssembly.asm -o $temporary_folder/countAssembly.o && gcc -o $build_folder/countAssembly $temporary_folder/countAssembly.o 2>/dev/null
 
     elif [[ $arg == "python" ]]; then
-        cp $src_folder/Python/countPython.py $build_folder/countPython.py
+        prepare python cp $src_folder/Python/countPython.py $build_folder/countPython.py
 
     elif [[ $arg == "bash" ]]; then
-        cp $src_folder/Bash/countBash.sh $build_folder/countBash.sh
-        chmod +x $build_folder/countBash.sh
+        prepare bash cp $src_folder/Bash/countBash.sh $build_folder/countBash.sh && chmod +x $build_folder/countBash.sh
 
     elif [[ $arg == "swift" ]]; then
-        cp $src_folder/Swift/countSwift.swift $build_folder/countSwift.swift
+        prepare swift cp $src_folder/Swift/countSwift.swift $build_folder/countSwift.swift
 
     elif [[ $arg == "ruby" ]]; then
-        cp $src_folder/Ruby/countRuby.rb $build_folder/countRuby.rb
+        prepare ruby cp $src_folder/Ruby/countRuby.rb $build_folder/countRuby.rb
 
     elif [[ $arg == "perl" ]]; then
-        cp $src_folder/Perl/countPerl.pl $build_folder/countPerl.pl
+        prepare perl cp $src_folder/Perl/countPerl.pl $build_folder/countPerl.pl
 
     elif [ $arg == "javascript" ] || [ $arg == "js" ]; then
-        cp $src_folder/Javascript/countJS.js $build_folder/countJS.js
+        prepare javascript cp $src_folder/Javascript/countJS.js $build_folder/countJS.js
 
     fi
 done

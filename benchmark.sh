@@ -28,6 +28,7 @@ elif [ "$1" == "-h" ] || [ "$1" == "--help" ] ; then
     echo -e "\t -r, --run \t Run the benchmark"
     echo -e "\t\t optional arguments: one or more programming language to benchmark"
     echo -e "\t\t example: benchmark -r python c java"
+    echo -e "\t -rs, --run-short \t Same as \"-r\" option but only displays a short output"
     echo -e "\t -t, --todo \t Displays the next planned updates"
     echo -e "\t -v, --version \t Displays the current version number"
 
@@ -66,10 +67,13 @@ elif [ "$1" == "-r" ] || [ "$1" == "--run" ]; then
     chmod +x init.sh
     ./init.sh "${@:2}"
 
+elif [ "$1" == "-rs" ] || [ "$1" == "--run-short" ]; then
+    chmod +x init.sh
+    ./init.sh 1 ${@:2}
+
 elif [ "$1" == "-t" ] || [ "$1" == "--todo" ]; then
     echo "  * Add more tests"
     echo "  * Add more programming languages"
-    echo "  * Display output's short version"
 
 elif [ "$1" == "-v" ] || [ "$1" == "--version" ]; then
     echo $NAME" v"$VERSION
